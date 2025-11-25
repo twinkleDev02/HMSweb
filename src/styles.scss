@@ -1,0 +1,12 @@
+@import 'assets/css/bootstrap.min.css';
+@import 'assets/plugins/fontawesome/css/fontawesome.css';
+@import 'assets/plugins/fontawesome/css/all.min.css';
+@import 'assets/css/feather.css';
+@import 'assets/css/custom.css';
+@import '@ngxpert/hot-toast/styles.css';
+.select2-container--bootstrap-5 .select2-selection{
+    min-height: calc(2.0em + .75rem + 2px) !important;
+}
+.select2-container--bootstrap-5 .select2-selection--single .select2-selection__rendered .select2-selection__placeholder{
+    line-height: 1.9 !important;
+}

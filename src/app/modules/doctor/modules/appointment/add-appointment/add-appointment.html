@@ -1,0 +1,182 @@
+<!-- Main Wrapper -->
+<div class="main-wrapper">
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-bar-two">
+        <div class="container">
+            <div class="row align-items-center inner-banner">
+                <div class="col-md-12 col-12 text-center">
+                    <h2 class="breadcrumb-title">Add Appointment</h2>
+                    <nav aria-label="breadcrumb" class="page-breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a routerLink="/doctor">Home</a></li>
+                            <li class="breadcrumb-item">Add Appointment</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Content -->
+    <div class="content">
+        <div class="container">
+
+            <div class="dashboard-header mb-3">
+                <h3>Add Appointment</h3>
+            </div>
+
+            <form [formGroup]="addAppointmentForm" (ngSubmit)="onSubmit()">
+
+                <!-- 🟦 Patient Information -->
+                <div class="card shadow-sm p-3 mb-4 border-0 rounded-3">
+                    <h5 class="mb-3 border-bottom pb-2">Patient Information</h5>
+
+                    <div class="row">
+
+                        <!-- Full Name -->
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Full Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" formControlName="fullName">
+                                <small class="text-danger" *ngIf="isInvalid('fullName')">Full Name is required</small>
+                            </div>
+                        </div>
+
+                        <!-- Gender -->
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Gender</label>
+                                <select class="form-control" appSelect2 placeholder="-- Select Gender --" formControlName="gender">
+                                    <option value="">Select Gender</option>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- DOB -->
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Date of Birth</label>
+                                <input type="date" class="form-control" formControlName="dob" [max]="todayDate">
+                            </div>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Phone Number <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" formControlName="phoneNumber" placeholder="10-digit number">
+                                <small class="text-danger" *ngIf="isInvalid('phoneNumber')">Enter valid phone number</small>
+                            </div>
+                        </div>
+
+                        <!-- Address -->
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label class="form-label">Address</label>
+                                <textarea rows="2" class="form-control" formControlName="address"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 🟩 Vital Information -->
+                <div class="card shadow-sm p-3 mb-4 border-0 rounded-3">
+                    <h5 class="mb-3 border-bottom pb-2">Vitals & Health Information</h5>
+
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <label class="form-label">Weight (kg)</label>
+                            <input type="number" class="form-control" formControlName="weight">
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="form-label">Height (cm)</label>
+                            <input type="number" class="form-control" formControlName="height">
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="form-label">Pulse</label>
+                            <input type="number" class="form-control" formControlName="pulse">
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="form-label">Oxygen (%)</label>
+                            <input type="number" class="form-control" formControlName="oxygen">
+                        </div>
+
+                        <div class="col-md-3 mt-3">
+                            <label class="form-label">Refer Doctor Name</label>
+                            <input type="text" class="form-control" formControlName="referDoctor">
+                        </div>
+
+                        <div class="col-md-3 mt-3">
+                            <label class="form-label">Abha ID</label>
+                            <input type="text" class="form-control" formControlName="abhaId">
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 🟧 Appointment Information -->
+                <div class="card shadow-sm p-3 mb-4 border-0 rounded-3">
+                    <h5 class="mb-3 border-bottom pb-2">Appointment Details</h5>
+
+                    <div class="row">
+                        <!-- Appointment Date -->
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Appointment Date <span class="text-danger">*</span></label>
+                                <input type="datetime-local" class="form-control" formControlName="appointmentDate" [min]="TodayDateTime">
+                                <small class="text-danger" *ngIf="isInvalid('appointmentDate')"> Appointment Date is Required</small>
+                            </div>
+                        </div>
+
+                        <!-- Doctor -->
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Doctor <span class="text-danger">*</span></label>
+                                <select class="form-control" appSelect2 placeholder="-- Select Doctor --"  formControlName="doctor">
+                                    <option value="">Select Doctor</option>
+                                    <option *ngFor="let doc of doctorList" [value]="doc.userId">
+                                        {{ doc.fullName }}
+                                    </option>
+                                </select>
+                                <small class="text-danger" *ngIf="isInvalid('doctor')">Doctor Name is Required</small>
+                            </div>
+                        </div>
+
+                        <!-- Fee -->
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Appointment Fee</label>
+                                <input type="number" class="form-control" formControlName="appointmentFee">
+                            </div>
+                        </div>
+
+                        <!-- Reason -->
+                        <div class="col-md-3">
+                            <div class="mb-3">
+                                <label class="form-label">Visit Reason</label>
+                                <textarea class="form-control" formControlName="visitReason"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-end mt-3">
+                    <button type="submit" class="btn btn-primary px-4 py-2">Save Appointment</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
