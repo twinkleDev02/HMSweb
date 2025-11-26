@@ -21,62 +21,58 @@
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
-        "build": {
-          "builder": "@angular/build:application",
-          "options": {
-            "browser": "src/main.ts",
-            "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
-            ],
-            "styles": [
-              "src/styles.scss",
-              "src/assets/css/bootstrap.min.css",
-              "src/assets/plugins/fontawesome/css/fontawesome.css",
-              "src/assets/plugins/fontawesome/css/all.min.css",
-              "src/assets/css/feather.css",
-              "src/assets/css/custom.css",
-              "node_modules/select2/dist/css/select2.min.css",
-              "node_modules/select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.min.css"
-            ],
-            "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/select2/dist/js/select2.min.js"
-            ]
-          },
-          "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "3MB",
-                  "maximumError": "5MB"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
-                }
-              ],
-              "outputHashing": "all",
-              "optimization": true,
-              "sourceMap": false,
-              "extractLicenses": true
-            },
-            "development": {
-              "optimization": false,
-              "extractLicenses": false,
-              "sourceMap": true
-            }
-          },
-          "defaultConfiguration": "production"
-        },
+          "build": {
+        "builder": "@angular-devkit/build-angular:browser",
+  "options": {
+    "outputPath": "dist/HMSweb",
+    "index": "src/index.html",
+    "main": "src/main.ts",
+    "tsConfig": "tsconfig.app.json",
+    "assets": [
+      "src/favicon.ico",
+      "src/assets",
+      {
+        "glob": "**/*",
+        "input": "public"
+      }
+    ],
+    "styles": [
+      "src/styles.scss",
+      "src/assets/css/bootstrap.min.css",
+      "src/assets/plugins/fontawesome/css/fontawesome.css",
+      "src/assets/plugins/fontawesome/css/all.min.css",
+      "src/assets/css/feather.css",
+      "src/assets/css/custom.css",
+      "node_modules/select2/dist/css/select2.min.css",
+      "node_modules/select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.min.css"
+    ],
+    "scripts": [
+      "node_modules/jquery/dist/jquery.min.js",
+      "node_modules/select2/dist/js/select2.min.js"
+    ]
+  },
+  "configurations": {
+    "production": {
+      "budgets": [
+        {
+          "type": "initial",
+          "maximumWarning": "3MB",
+          "maximumError": "5MB"
+        }
+      ],
+      "outputHashing": "all",
+      "optimization": true,
+      "sourceMap": false,
+      "extractLicenses": true
+    },
+    "development": {
+      "optimization": false,
+      "extractLicenses": false,
+      "sourceMap": true
+    }
+  },
+  "defaultConfiguration": "production"
+},
         "serve": {
           "builder": "@angular/build:dev-server",
           "configurations": {
