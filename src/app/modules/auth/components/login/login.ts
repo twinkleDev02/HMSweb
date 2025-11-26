@@ -51,7 +51,7 @@ export class Login {
     userId: this.loginForm.value.phoneNumber,
     password: this.loginForm.value.password,
     appId: 0
-  };
+  }; 
 
   this.authService.login(loginPayload).subscribe({
     next: (response: any) => {

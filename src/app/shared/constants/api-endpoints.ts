@@ -10,7 +10,7 @@ export const ApiEndpoints = {
   },
   APPOINTMENT : 
   {
-    GET:`${API_BASE_URL}/AppointmentAPI/GET`,
+    GET:`${API_BASE_URL}/AppointmentAPI/Get`,
     POST:`${API_BASE_URL}/AppointmentAPI/POST`
   }
  
